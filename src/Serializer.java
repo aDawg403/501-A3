@@ -74,27 +74,19 @@ public class Serializer {
 		
 		String elementName;
 		String storeValue;
+		if (!hash.containsKey(myField)) {
+			serialize(myField);
+		}
+		storeValue = String.valueOf(hash.get(myField));
 		if (fieldClass.isPrimitive()){
 			elementName = "Value";
-			storeValue = String.valueOf(myField.get(obj));
-			//storeValue = 
 		}
 		else {
 			elementName = "Reference";
-			String referenceNum;
-			if (!hash.containsKey(myField)) {
-				serialize(myField);
-				storeValue = String.valueOf(Integer.parseInt(size)-1);
-			}
-			else {
-				storeValue = String.valueOf(hash.get(myField));
-			}
 		}
 		Element varElem = new Element(elementName);
 		System.out.println(storeValue);
 		varElem.addContent(storeValue);
-		
-		
 		
 	}
 }
