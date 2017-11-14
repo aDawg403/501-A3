@@ -1,6 +1,5 @@
 
 public class ClassA {
-	public String name = "";
-	public int age = 0;
-	public boolean isHuman = false;
+	public boolean male = false;
+	public int age = 88;
 }
