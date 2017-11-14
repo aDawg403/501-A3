@@ -20,7 +20,7 @@ import org.jdom2.output.XMLOutputter;
 
 public class Serializer {
 
-	Document myDoc = new Document(new Element("Serialized"));
+	Document myDoc = new Document(new Element("serialized"));
 	Map hash = new IdentityHashMap();
 	String size =  String.valueOf(hash.size());
 	
@@ -37,24 +37,27 @@ public class Serializer {
 	
 	public org.jdom2.Document serialize(Object obj) throws IllegalAccessException{
 		Class objClass = obj.getClass();
-		Element objElem = new Element("Object");
+		Element objElem = new Element("object");
 		
-		objElem.setAttribute("Class", objClass.getName());
+		objElem.setAttribute("class", objClass.getName());
 		objElem.setAttribute("id", size);
 		myDoc.getRootElement().addContent(objElem);
 		if (!objClass.isArray()) {
 			Field[] myFields = objClass.getFields();
 			for (Field field:myFields){
 				field.setAccessible(true);
-				Class fieldClass = field.getClass();
 				Class declaringClass = field.getDeclaringClass();
 				hashAdd(field, hash);
-				Element fieldElem = new Element("Field");
-				fieldElem.setAttribute("Class", fieldClass.getName());
+				Element fieldElem = new Element("field");
+				fieldElem.setAttribute("name", field.getName());
+				fieldElem.setAttribute("declaringclass", declaringClass.getName());
 				serializeFieldVar(fieldElem, field, field.get(obj));
 				objElem.addContent(fieldElem);
 				
 			}	
+		}
+		else {
+			//it is an array
 		}
 		return myDoc;
 	}
@@ -79,14 +82,15 @@ public class Serializer {
 		}
 		storeValue = String.valueOf(hash.get(myField));
 		if (fieldClass.isPrimitive()){
-			elementName = "Value";
+			elementName = "value";
 		}
 		else {
-			elementName = "Reference";
+			elementName = "reference";
 		}
 		Element varElem = new Element(elementName);
-		System.out.println(storeValue);
+		if (Modifier.isTransient(myField.getModifiers())) {
+			storeValue = null;
+		}
 		varElem.addContent(storeValue);
-		
 	}
 }
