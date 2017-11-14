@@ -1,5 +1,4 @@
 
 public class ClassA {
-	public boolean male = false;
-	public int age = 88;
+	public int[] ages = {1, 2, 3, 4};
 }

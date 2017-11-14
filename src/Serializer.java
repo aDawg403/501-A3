@@ -42,8 +42,13 @@ public class Serializer {
 				Element fieldElem = new Element("field");
 				fieldElem.setAttribute("name", field.getName());
 				fieldElem.setAttribute("declaringclass", declaringClass.getName());
-				objElem.addContent(fieldElem);	
-				serializeFieldVar(fieldElem, field, obj);
+				objElem.addContent(fieldElem);
+				if (field.getType().isArray()) {
+					serializeFieldArr(fieldElem, field, obj);
+				}
+				else {
+					serializeFieldVar(fieldElem, field, obj);
+				}
 			}	
 		}
 		else {
@@ -77,7 +82,6 @@ public class Serializer {
 	}
 	
 	public void serializeFieldVar(Element parent, Field myField, Object obj) throws IllegalAccessException {
-		//assumes field is not an array
 		Class fieldClass = myField.getType();
 		if (!hash.containsKey(fieldClass)){
 			serializeClass(fieldClass);
@@ -100,6 +104,38 @@ public class Serializer {
 		Element storeElem = new Element(elementName);
 		storeElem.addContent(storeValue);
 		parent.addContent(storeElem);
+	}
+	
+	
+	public void serializeFieldArr(Element myElem, Field myField, Object obj) {
+		Class fieldClass = myField.getType().getComponentType();
+		if (!hash.containsKey(fieldClass)){
+			serializeClass(fieldClass);
+		}
+		
+		String elementName;
+		if (fieldClass.isPrimitive()){
+			elementName = "value";
+		}
+		else {
+			elementName = "reference";
+		}
+		String storeValue;
+		for (int i = 0; i < Array.getLength(myField); i++) {
+			if (elementName == "value") {
+				storeValue = String.valueOf(Array.get(myField, i));
+			}
+			else {
+				storeValue = String.valueOf(hash.get(fieldClass));
+			}
+			Element storeElem = new Element(elementName);
+			storeElem.addContent(storeValue);
+			myElem.addContent(storeElem);
+			
+		}		
+		if (Modifier.isTransient(myField.getModifiers())) {
+			storeValue = null;
+		}
 	}
 	
 	public void serializeClass(Class myClass) {
