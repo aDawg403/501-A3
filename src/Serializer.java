@@ -44,7 +44,8 @@ public class Serializer {
 				fieldElem.setAttribute("declaringclass", declaringClass.getName());
 				objElem.addContent(fieldElem);
 				if (field.getType().isArray()) {
-					serializeFieldArr(fieldElem, field, obj);
+					Object fieldObject = field.get(obj);
+					serializeFieldArr(fieldElem, field, fieldObject);
 				}
 				else {
 					serializeFieldVar(fieldElem, field, obj);
@@ -112,7 +113,6 @@ public class Serializer {
 		if (!hash.containsKey(fieldClass)){
 			serializeClass(fieldClass);
 		}
-		
 		String elementName;
 		if (fieldClass.isPrimitive()){
 			elementName = "value";
@@ -121,21 +121,18 @@ public class Serializer {
 			elementName = "reference";
 		}
 		String storeValue;
-		for (int i = 0; i < Array.getLength(myField); i++) {
+		for (int i = 0; i < Array.getLength(obj); i++) {
 			if (elementName == "value") {
-				storeValue = String.valueOf(Array.get(myField, i));
+				storeValue = String.valueOf(Array.get(obj, i));
 			}
 			else {
 				storeValue = String.valueOf(hash.get(fieldClass));
 			}
 			Element storeElem = new Element(elementName);
-			storeElem.addContent(storeValue);
+			storeElem.addContent(String.valueOf(storeValue));
 			myElem.addContent(storeElem);
 			
 		}		
-		if (Modifier.isTransient(myField.getModifiers())) {
-			storeValue = null;
-		}
 	}
 	
 	public void serializeClass(Class myClass) {
