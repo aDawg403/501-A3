@@ -29,7 +29,7 @@ public class Driver{
 	
 	
 	public static void main(String[] args) {
-		int port = 9090;
+		int port = 9091;
 		
 		//EDIT OBJECTS HERE ***************************************************************************************
 		
@@ -79,17 +79,13 @@ public class Driver{
 			if (destination == "localhost") {
 				destination = "127.0.0.1";
 			}
-			System.out.println("Beginning transfer");
 			Socket sock = new Socket(destination, port);
-			System.out.println("Beginning transfer1");
 			OutputStream out = sock.getOutputStream();
-			System.out.println("Beginning transfer2");
 			
 			FileInputStream inputStream = new FileInputStream(myFile);
 			byte[] buffer = new byte[1024 * 1024];
 			int read;
-			while (inputStream.read(buffer) > 0) {
-				read = inputStream.read(buffer);
+			while ((read = inputStream.read(buffer)) > 0) {
 				out.write(buffer, 0, read);
 			}
 			System.out.println("Finished transfer");
