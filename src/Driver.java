@@ -26,9 +26,6 @@ public class Driver {
 		String server = "localhost";
 		int port = 8080;
 		ClassA test = new ClassA();
-		ClassA test1 = new ClassA();
-		ClassA test2 = new ClassA();
-		ClassA[] array = new ClassA[]{test, test1, test2};
 		
 		//------------MAINLINE PROCEDURE------------
 		try {
@@ -38,6 +35,10 @@ public class Driver {
 		}
 		
 		System.out.print(new XMLOutputter().outputString(myDoc));
+		
+		Deserializer des = new Deserializer();
+		System.out.println("\n\n\n\n\n");
+		des.deserialize(myDoc);
 		
 		
 	}

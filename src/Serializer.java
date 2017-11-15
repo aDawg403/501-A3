@@ -29,11 +29,10 @@ public class Serializer {
 	public org.jdom2.Document serialize(Object obj) throws IllegalAccessException{
 		Class objClass = obj.getClass();
 		Element objElem = new Element("object");
-		objElem.setAttribute("class", objClass.getName());
+		objElem.setAttribute("class", String.valueOf(objClass.getName()));
 		objElem.setAttribute("id", size);
 		myDoc.getRootElement().addContent(objElem);
 		hashAdd(obj, hash);
-		System.out.println("added class");
 		if (!objClass.isArray()) {
 			Field[] myFields = objClass.getFields();
 			for (Field field:myFields){
@@ -135,9 +134,10 @@ public class Serializer {
 		}		
 	}
 	
+	
 	public void serializeClass(Class myClass) {
 		Element objElem = new Element("object");
-		objElem.setAttribute("class", String.valueOf(myClass));
+		objElem.setAttribute("class", String.valueOf(myClass.getName()));
 		objElem.setAttribute("id", size);
 		myDoc.getRootElement().addContent(objElem);
 		hashAdd(myClass, hash);
