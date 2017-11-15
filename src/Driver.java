@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.net.Socket;
-
+import java.util.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,13 +26,29 @@ public class Driver{
 		
 		//EDIT OBJECTS HERE ***************************************************************************************
 		
-		
-		
-		ClassB test = new ClassB();				//Simple object with primitive fields
-		//ClassA test = new ClassA();				//Object with references
-		//ClassC test = new ClassC();				//Object with array of primitives
-		//ClassD test = new ClassD();				//Object with array of references
-		//ClassE test = new ClassE();			//Object collection
+		Scanner reader = new Scanner(System.in);
+		displayOptions();
+		int n = reader.nextInt();
+		Object test = null;
+		if (n == 1) {
+			test = new ClassB();				//Simple object with primitive fields
+		}
+		else if (n == 2) {
+			test = new ClassA();				//Object with references
+		}
+		else if (n == 3) {
+			test = new ClassC();				//Object with array of primitives
+		}
+		else if (n == 4) {
+			test = new ClassD();				//Object with array of references
+		}
+		else if (n == 5) {
+			test = new ClassE();			//Object collection
+		}
+		else {
+			System.out.println("Invalid input");
+			System.exit(0);
+		}
 		
 		
 		//EDIT OBJECTS HERE ***************************************************************************************
@@ -92,6 +108,15 @@ public class Driver{
 			System.out.print(e);
 		}
 		
+	}
+	
+	private static void displayOptions() {
+		System.out.println("Input a number and choose an object to serialize/deserialize");
+		System.out.println("1 - Simple Object with primitive fields");
+		System.out.println("2 - Object with reference fields");
+		System.out.println("3 - Object with an array of primitives as a field");
+		System.out.println("4 - Object with an array of references as a field");
+		System.out.println("5 - Object collection");
 	}
 	
 	
