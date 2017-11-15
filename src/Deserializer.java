@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.IdentityHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -19,37 +19,37 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 public class Deserializer {
-
-	String size = "";
+	int size;
+	Map hashM = new HashMap();
 	
 	public Deserializer() {
-		
+		size = 0;
 	}
 	public void hashAdd(Object obj, Map hash) {
-		hash.put(obj, size);
-		size = String.valueOf(hash.size());
+		hash.put(size, obj);
+		size = hash.size();
 		
 	}
 	
 	public Object deserialize(org.jdom2.Document myDoc) {
-		Map hashM = new IdentityHashMap();
 		List elements = myDoc.getRootElement().getChildren();
-		//Element firstElem = (Element)elements.get(0);
-		//hashAdd(elements, hashM);
 		try {
-			createInstances(elements, hashM);
-			createFields(elements, hashM);
+			createInstances(elements);
+			createFields(elements);
 		}
 		catch(Exception e) {
 			
 		}
-		
-		
-		return 1;
+		System.out.println("CHECK1");
+		System.out.println(hashM);
+		System.out.println("CHECK2");
+		System.out.println(hashM.get(0));
+		System.out.println("CHECK3");
+		return (Object)hashM.get(0);
 		
 		
 	}
-	public void createInstances(List<Element> elements, Map hashM) {
+	public void createInstances(List<Element> elements) {
 		Class myClass = null;
 		String className = null;
 		for (Element e:elements) {
@@ -59,13 +59,16 @@ public class Deserializer {
 				myClass = Class.forName(className);
 				if (myClass.isArray()) {
 					myObj = Array.newInstance(Class.forName(className), Integer.parseInt(e.getAttributeValue("length")));
+					hashM.put(e.getAttributeValue("id"), myObj);
 				}
 				else {
-					Constructor myCons = myClass.getConstructor();
+					Constructor myCons = myClass.getDeclaredConstructor(null);
 					myCons.setAccessible(true);
-					myObj = myCons.newInstance();
+					myObj = myCons.newInstance(null);
 				}
+				System.out.println(myObj);
 				hashAdd(myObj, hashM);
+				
 			}
 			catch(Exception e1) {
 				continue;
@@ -74,71 +77,73 @@ public class Deserializer {
 
 	}
 	
-	public void createFields(List<Element> elements, Map hashM) throws Exception{
+	public void createFields(List<Element> elements) throws Exception{
 		for (Element e: elements) {
 			List fieldElements = e.getChildren();
 			Object value = hashM.get(e.getAttributeValue("id"));
-			if (!value.getClass().isArray()) {
-				for (Object field : fieldElements) {
-					Element fieldElement = (Element) field;
-					String className = fieldElement.getAttributeValue("declaringclass");
-					Class fieldDC = Class.forName(className);
-					String fieldName = fieldElement.getAttributeValue("name");
-					Field f = fieldDC.getDeclaredField(fieldName);
-					f.setAccessible(true);
-					Element vElt = (Element) fieldElement.getChildren().get(0);
-					f.set(value, deserializeValue(vElt, f.getType(), hashM));
-				}
-			} else {
+			if (value.getClass().isArray()) {
 				Class comptype = value.getClass().getComponentType();
 				for (int j=0; j<fieldElements.size(); j++)
 					Array.set(value, j, deserializeValue((Element)fieldElements.get(j), comptype, hashM));
+			} 
+			else {
+				for (Object field : fieldElements) {
+					Element fieldElement = (Element) field;
+					String className = fieldElement.getAttributeValue("declaringclass");
+					Class declaring = Class.forName(className);
+					String attrName = fieldElement.getAttributeValue("name");
+					Field f = declaring.getDeclaredField(attrName);
+					f.setAccessible(true);
+					Element cElement = fieldElement.getChildren().get(0);
+					f.set(value, deserializeValue(cElement, f.getType(), hashM));
+				}
 			}
 		}
 	}
 	
 	
-	public static Object deserializeValue(Element valueE, Class fieldType,Map table) {
-		Object returnVal;
-		String valtype = valueE.getName();
+	public static Object deserializeValue(Element e, Class fieldClass, Map hashMap) {
+		Object resultingObj;
+		String valtype = e.getName();
 		if (valtype.equals("null"))
-			return null;
+			resultingObj = null;
 		else if (valtype.equals("reference"))
-			return table.get(valueE.getText());
+			resultingObj = hashMap.get(e.getText());
 		else {
-			returnVal = testTypePrimative(fieldType, valueE);
+			resultingObj = newPrimitive(e, fieldClass);
 			
 			
 		}
-		return returnVal;
+		return resultingObj;
 	}
 	
 	
 	
-	private static Object testTypePrimative(Class fieldType, Element valueE) {
-		if (fieldType.equals(boolean.class)) {
-			if (valueE.getText().equals("true"))
-				return Boolean.TRUE;
+	private static Object newPrimitive(Element e, Class fieldClass) {
+		Object val;
+		if (fieldClass.equals(boolean.class)) {
+			if (e.getText().equals("true"))
+				val = Boolean.TRUE;
 			else
-				return Boolean.FALSE;
+				val = Boolean.FALSE;
 		}
-		
-		else if (fieldType.equals(long.class))
-			return Long.valueOf(valueE.getText());
-		else if (fieldType.equals(float.class))
-			return Float.valueOf(valueE.getText());
-		else if (fieldType.equals(double.class))
-			return Double.valueOf(valueE.getText());
-		else if (fieldType.equals(char.class))
-			return new Character(valueE.getText().charAt(0));
-		else if (fieldType.equals(byte.class))
-			return Byte.valueOf(valueE.getText());
-		else if (fieldType.equals(short.class))
-			return Short.valueOf(valueE.getText());
-		else if (fieldType.equals(int.class))
-			return Integer.valueOf(valueE.getText());
+		else if (fieldClass.equals(double.class))
+			val = Double.valueOf(e.getText());
+		else if (fieldClass.equals(short.class))
+			val = Short.valueOf(e.getText());
+		else if (fieldClass.equals(int.class))
+			val = Integer.valueOf(e.getText());
+		else if (fieldClass.equals(char.class))
+			val = new Character(e.getText().charAt(0));
+		else if (fieldClass.equals(byte.class))
+			val = Byte.valueOf(e.getText());
+		else if (fieldClass.equals(float.class))
+			val = Float.valueOf(e.getText());	
+		else if (fieldClass.equals(long.class))
+			val = Long.valueOf(e.getText());
 		else
-			return valueE.getText();
+			val = e.getText();
+		return val;
 		
 	}
 	

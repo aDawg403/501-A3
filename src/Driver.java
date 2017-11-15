@@ -25,7 +25,7 @@ public class Driver {
 		Serializer s = new Serializer(myDoc);
 		String server = "localhost";
 		int port = 8080;
-		ClassA test = new ClassA();
+		ClassB test = new ClassB();
 		
 		//------------MAINLINE PROCEDURE------------
 		try {
@@ -34,11 +34,16 @@ public class Driver {
 		catch(Exception e) {
 		}
 		
-		System.out.print(new XMLOutputter().outputString(myDoc));
+		//System.out.print(new XMLOutputter().outputString(myDoc));
 		
 		Deserializer des = new Deserializer();
 		System.out.println("\n\n\n\n\n");
-		des.deserialize(myDoc);
+		try {
+			Object dese = des.deserialize(myDoc);
+			Inspector.inspect(dese, true);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		
 		
 	}

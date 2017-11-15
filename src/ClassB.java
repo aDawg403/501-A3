@@ -1,4 +1,4 @@
 
 public class ClassB {
-	int age = 8;
+	int[] ages = new int[]{1, 2, 3};
 }
