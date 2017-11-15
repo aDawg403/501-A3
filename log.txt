@@ -1,0 +1,109 @@
+commit 5dd7ebb5ed7d06310b6fc0245bf306fbc647c24d
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Wed Nov 15 11:41:33 2017 -0700
+
+    Remove size variable in Deserializer class
+
+commit ae4185ea6999fbd8e0a513d00aa8a7206b364925
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Wed Nov 15 11:38:04 2017 -0700
+
+    Remove dead code in transfer method in Driver
+
+commit 78cbe8f9229b0f0e573232a1e8ef74f1a5c26791
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Wed Nov 15 11:28:42 2017 -0700
+
+    Test cases passing
+
+commit 73ecad4c38543b9795225f5b01d9d8931e7847e1
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Wed Nov 15 05:10:13 2017 -0700
+
+    Created new failing test suite
+
+commit f7b16a6d05dc7e7392e63539e812e420ad130b85
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Wed Nov 15 03:57:42 2017 -0700
+
+    updated driver class
+
+commit 80a2b22ada138c365096efc49d3214446d402e02
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Wed Nov 15 02:48:03 2017 -0700
+
+    Reciever class implemented
+
+commit b6d78161138393fa99b3e6ea9b7aea2cf38a7c83
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Wed Nov 15 01:34:28 2017 -0700
+
+    Finish deserialization
+
+commit 12a23e6774deb4a1be1b27e472a258fc993dbf5d
+Author: Arthur Adam Iwaniszyn <Arthur@Arthurs-MBP.hitronhub.home>
+Date:   Tue Nov 14 23:02:02 2017 -0700
+
+    Deserializer
+
+commit 98e9aa9fe52073744c8fe653d762da927a878a6f
+Author: Arthur Adam Iwaniszyn <Arthur@Arthurs-MacBook-Pro.local>
+Date:   Tue Nov 14 15:17:40 2017 -0700
+
+    Serializer finally working
+
+commit c1dcf49b5cd2fdca350e17a834796814dfb2d525
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Tue Nov 14 13:11:28 2017 -0700
+
+    Added arrays to serializer
+
+commit 6e55eb57de8288370c3b9eef6962c853e469d261
+Merge: 7b787a7 df41d03
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Tue Nov 14 12:35:16 2017 -0700
+
+    Merge branch 'master' of https://github.com/aDawg403/501-A3
+
+commit 7b787a7e899a051a33eb0f0d24eee5012108b25f
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Tue Nov 14 12:30:39 2017 -0700
+
+    Merge methods serializeClass and serializeField
+
+commit df41d0397fe95d85b0ac5254edef26146ad088ae
+Author: aDawg403 <aiwanisz@ucalgary.ca>
+Date:   Tue Nov 14 12:30:39 2017 -0700
+
+    Merge methods serializeClass and serializeFieldVar
+
+commit 8ff20c51c58c0eb2baed07e9d1ff6b6ed6c591db
+Author: Arthur Adam Iwaniszyn <Arthur@Arthurs-MBP.hitronhub.home>
+Date:   Mon Nov 13 23:30:58 2017 -0700
+
+    serialization bug fix
+
+commit b8f20271946727d7ccdc1ff69324464ae8cc549b
+Author: Arthur Adam Iwaniszyn <Arthur@Arthurs-MBP.hitronhub.home>
+Date:   Mon Nov 13 18:58:19 2017 -0700
+
+    Remove repetetive code smell
+
+commit 8e76d59ad6d81f110c547b9def2c1ac217e2370d
+Merge: 905b89f dd41af1
+Author: Arthur Adam Iwaniszyn <Arthur@Arthurs-MBP.hitronhub.home>
+Date:   Mon Nov 13 18:53:57 2017 -0700
+
+    Serializing objects
+
+commit 905b89f83871c149b263c6f19aecb43e596ad29c
+Author: Arthur Adam Iwaniszyn <Arthur@Arthurs-MBP.hitronhub.home>
+Date:   Mon Nov 13 15:22:30 2017 -0700
+
+    Hello World
+
+commit dd41af14974bc5c5b75208d1eb59adcd5954b6ea
+Author: aDawg <aiwanisz@ucalgary.ca>
+Date:   Mon Nov 13 15:19:12 2017 -0700
+
+    Initial commit

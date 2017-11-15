@@ -24,7 +24,7 @@ public class Deserializer {
 	
 	public Deserializer() {
 	}
-	public void hashAdd(Object obj, Map hash) {
+	private void hashAdd(Object obj, Map hash) {
 		hash.put(size, obj);
 		
 	}
