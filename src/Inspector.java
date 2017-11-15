@@ -1,5 +1,5 @@
 //By: Arthur Iwaniszyn 10124961
-//CPSC 501 Assignment 2
+//CPSC 501 Assignment 3
 
 
 import java.lang.reflect.Method;

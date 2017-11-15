@@ -1,8 +1,10 @@
+//By: Arthur Iwaniszyn 10124961
+//CPSC 501 Assignment 3
+
 import java.io.*;
 import java.net.*;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.Document;
-import org.jdom2.JDOMException;
 
 public class Recieve {
 	

@@ -1,5 +1,6 @@
+//By: Arthur Iwaniszyn 10124961
+//CPSC 501 Assignment 3
 import static org.junit.Assert.*;
-import java.io.File;
 import org.junit.Test;
 import org.jdom2.Document;
 import org.jdom2.Element;

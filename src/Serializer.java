@@ -1,4 +1,5 @@
-
+//By: Arthur Iwaniszyn 10124961
+//CPSC 501 Assignment 4
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

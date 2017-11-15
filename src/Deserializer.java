@@ -1,23 +1,15 @@
-
+//By: Arthur Iwaniszyn 10124961
+//CPSC 501 Assignment 3
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 
-import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 public class Deserializer {
 	int size;
 	Map hashM = new HashMap();
