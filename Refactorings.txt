@@ -1,16 +1,13 @@
 Commit = b8f20271946727d7ccdc1ff69324464ae8cc549b
-Code Smell - Duplicate Code in Serializer class
+Code Smell - Duplicated Code in Serializer class
 Deodorant - Extract module
 
 Commit = 7b787a7e899a051a33eb0f0d24eee5012108b25f
-Code Smell - Duplicate Code in Serializer class
+Code Smell - Duplicated Code in Serializer class
 Deodorant - Extract method
 
 Commit = ae4185ea6999fbd8e0a513d00aa8a7206b364925
-Code Smell - Feature envy with size variable in driver class
+Code Smell - Inappropriate Intimacy with size variable in driver class
 Deodorant - Move field
-
-
-
 
 

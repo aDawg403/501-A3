@@ -29,7 +29,7 @@ public class Driver{
 	
 	
 	public static void main(String[] args) {
-		int port = 8091;
+		int port = 4444;
 		
 		//EDIT OBJECTS HERE ***************************************************************************************
 		
@@ -90,9 +90,7 @@ public class Driver{
 			FileInputStream inputStream = new FileInputStream(myFile);
 			byte[] buffer = new byte[1024 * 1024];
 			int read = 0;
-			System.out.println("test");
 			while ((read = inputStream.read(buffer)) > 0) {
-				System.out.println("test1");
 				out.write(buffer, 0, read);
 			}
 			System.out.println("Finished transfer");
