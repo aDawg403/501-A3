@@ -84,9 +84,6 @@ public class Driver{
 	
 	public static void transfer(File myFile, String destination, int port){
 		try {
-			if (destination == "localhost") {
-				destination = "127.0.0.1";
-			}
 			Socket sock = new Socket(destination, port);
 			OutputStream out = sock.getOutputStream();
 			
