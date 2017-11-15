@@ -29,20 +29,28 @@ public class Driver{
 	
 	
 	public static void main(String[] args) {
-		int port = 9091;
+		int port = 8091;
 		
 		//EDIT OBJECTS HERE ***************************************************************************************
 		
 		
 		
-		ClassB test = new ClassB();				//Simple object with primitive fields
+		//ClassB test = new ClassB();				//Simple object with primitive fields
 		//ClassA test = new ClassA();				//Object with references
-
+		//ClassC test = new ClassC();				//Object with array of primitives
+		//ClassD test = new ClassD();				//Object with array of references
+		ClassE test = new ClassE();			//Object collection
 		
 		
 		//EDIT OBJECTS HERE ***************************************************************************************
 		try {
-			runSerializer(test, port);
+			Document myDoc = new Document(new Element("Serialized"));
+			Serializer s = new Serializer(myDoc);
+			Document doc = s.serialize(test);
+			Deserializer d = new Deserializer();
+			Object obj = d.deserialize(doc);
+			Inspector.inspect(obj, true);
+			//runSerializer(test, port);
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -84,8 +92,10 @@ public class Driver{
 			
 			FileInputStream inputStream = new FileInputStream(myFile);
 			byte[] buffer = new byte[1024 * 1024];
-			int read;
+			int read = 0;
+			System.out.println("test");
 			while ((read = inputStream.read(buffer)) > 0) {
+				System.out.println("test1");
 				out.write(buffer, 0, read);
 			}
 			System.out.println("Finished transfer");

@@ -1,5 +1,5 @@
 import static org.junit.Assert.*;
-
+import java.io.File;
 import org.junit.Test;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -18,22 +18,13 @@ public class testSerialize {
 		assertEquals(temp + 1, m.size());
 	}
 	
-	@Test
-	public void testGetHash(){
-		Document d = new Document();
-		Serializer s = new Serializer(d);
-		Map m = new IdentityHashMap();
-		int temp = m.size();
-		s.hashAdd("HELLO", m);
-		Object result = m.get(temp+1);
-		assertEquals(result, "HELLO");
-	}
 	
 	@Test
 	public void testSerializeRoot() {
-		Document d = new Document(new Element("serialized"));
+		Element e = new Element("serialized");
+		Document d = new Document(e);
 		Serializer s = new Serializer(d);
-		assertEquals(d.getRootElement(), new Element("serialized"));
+		assertEquals(d.getRootElement(), e);
 	}
-
+	
 }

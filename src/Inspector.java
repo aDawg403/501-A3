@@ -17,7 +17,6 @@ public class Inspector {
 	
 	
 	public static void inspect(Object myObject, boolean recurse) throws IllegalArgumentException, IllegalAccessException {
-		//inspectedClasses = new Vector();
 		recursive = recurse;
 		Class classObject = myObject.getClass();
 		

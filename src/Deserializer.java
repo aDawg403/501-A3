@@ -40,11 +40,6 @@ public class Deserializer {
 		catch(Exception e) {
 			
 		}
-		System.out.println("CHECK1");
-		System.out.println(hashM);
-		System.out.println("CHECK2");
-		System.out.println(hashM.get(0));
-		System.out.println("CHECK3");
 		return (Object)hashM.get(0);
 		
 		
