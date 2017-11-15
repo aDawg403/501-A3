@@ -35,11 +35,11 @@ public class Driver{
 		
 		
 		
-		//ClassB test = new ClassB();				//Simple object with primitive fields
+		ClassB test = new ClassB();				//Simple object with primitive fields
 		//ClassA test = new ClassA();				//Object with references
 		//ClassC test = new ClassC();				//Object with array of primitives
 		//ClassD test = new ClassD();				//Object with array of references
-		ClassE test = new ClassE();			//Object collection
+		//ClassE test = new ClassE();			//Object collection
 		
 		
 		//EDIT OBJECTS HERE ***************************************************************************************

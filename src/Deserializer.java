@@ -23,11 +23,9 @@ public class Deserializer {
 	Map hashM = new HashMap();
 	
 	public Deserializer() {
-		size = 0;
 	}
 	public void hashAdd(Object obj, Map hash) {
 		hash.put(size, obj);
-		size = hash.size();
 		
 	}
 	
