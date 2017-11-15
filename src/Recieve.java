@@ -8,7 +8,7 @@ public class Recieve {
 	
 	public static void main(String[] args) {
 		ServerSocket s = null;
-		int portNum = 8089;
+		int portNum = 9091;
 		try {
 			s = new ServerSocket(portNum);
 		}

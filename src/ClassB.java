@@ -1,4 +1,5 @@
 
 public class ClassB {
-	int[] ages = new int[]{1, 2, 3};
+	int age = 7;
+	boolean human = false;
 }
